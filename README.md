@@ -7,7 +7,7 @@ DBT é um fluxo de trabalho de transformação de dados seguindo as melhores pr�
 
 
 ## 🧪 Manual de Apoio
- O projeto foi desenvolvido com base nas instruções do seguinte documento:
+O projeto foi desenvolvido com base nas instruções do seguinte documento:
 
 - [Manual Base](https://quickstarts.snowflake.com/guide/accelerating_data_teams_with_snowflake_and_dbt_cloud_hands_on_lab/index.html?index=..%2F..index#0)
 
@@ -18,7 +18,6 @@ Para iniciar um projeto utilizando o DBT CLOUD, usaremos uma conta de teste. A c
 Por meio desta conta, será possível construir pipelines de transformação de dados escaláveis usando o DBT e o SNOWFLAKE.
 
 - [Link de criação conta teste Snowflake]: (https://signup.snowflake.com/)
-
 
 ## 🚀 Inicializando o projeto DBT
 Com a conta teste criada no Snowflake é preciso verificar que possuimos todos os dados de que precisamos para transformar e executar o projeto. 
@@ -38,6 +37,11 @@ select *
 from snowflake_sample_data.tpch_sf1.orders
 limit 100;
 ```
+
+
+
+
+
 
 do VS Code aberta, acesse o terminal pelo atalho *Ctrl + '*. 
 Acesse o caminho no qual deseja configurar seu primeiro projeto:
