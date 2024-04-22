@@ -1,35 +1,42 @@
 # PRIMEIROS PASSOS COM SNOWFLAKE E DBT CLOUD:
-  O real objetivo deste trabalho é demonstrar, passo a passo, como utilizar o DBT Cloud (Data Build Tool) e o SNOWFLAKE em um projeto analítico de dados.
-  SNOWFLAKE é a nuvem de dados que permite criar aplicativos com uso intensivo de dados sem sobrecarga operacional, para que você possa se concentrar em dados e análises em vez de no gerenciamento de infraestrutura.
-  DBT é um fluxo de trabalho de transformação de dados seguindo as melhores práticas de engenharia de software. Utilizando o SQL é possível construir pipelines de dados de nível de produção. Ele transforma os dados no warehouse aproveitando plataformas de dados em nuvem como o SNOWFLAKE.
+O real objetivo deste trabalho é demonstrar, passo a passo, como utilizar o DBT Cloud (Data Build Tool) e o SNOWFLAKE em um projeto analítico de dados.
+  
+SNOWFLAKE é a nuvem de dados que permite criar aplicativos com uso intensivo de dados sem sobrecarga operacional, para que você possa se concentrar em dados e análises em vez de no gerenciamento de infraestrutura.
+
+DBT é um fluxo de trabalho de transformação de dados seguindo as melhores práticas de engenharia de software. Utilizando o SQL é possível construir pipelines de dados de nível de produção. Ele transforma os dados no warehouse aproveitando plataformas de dados em nuvem como o SNOWFLAKE.
 
 
 ## 🧪 Manual de Apoio
-  O projeto foi desenvolvido com base nas instruções do seguinte documento:
+ O projeto foi desenvolvido com base nas instruções do seguinte documento:
 
 - [Manual Base](https://quickstarts.snowflake.com/guide/accelerating_data_teams_with_snowflake_and_dbt_cloud_hands_on_lab/index.html?index=..%2F..index#0)
 
 
 ## 🔨 Ferramentas Necessárias
-  Para iniciar um projeto utilizando o DBT CLOUD, usaremos uma conta de teste. A criação da conta DBT CLOUD será feita por meio do SNOWFLAKE através de uma conexão nativa (parceira). Por meio desta conta, será possível construir pipelines de transformação de dados escaláveis usando o DBT e o SNOWFLAKE.
+Para iniciar um projeto utilizando o DBT CLOUD, usaremos uma conta de teste. A criação da conta DBT CLOUD será feita por meio do SNOWFLAKE através de uma conexão nativa (parceira). 
+ 
+Por meio desta conta, será possível construir pipelines de transformação de dados escaláveis usando o DBT e o SNOWFLAKE.
 
 - [Link de criação conta teste Snowflake]: (https://signup.snowflake.com/)
 
 
 ## 🚀 Inicializando o projeto DBT
-  Com a conta teste criada no Snowflake é preciso verificar que possuimos todos os dados de que precisamos para transformar e executar o projeto. 
-  Vá para a guia "Worksheets", clique na opção de "+Worksheets" para adicionar uma nova planilha. Neste momento, clique em "Databases", você verá dois banco de dados e um deles se chama "snowflake sample data". Ao explandi-ló  você verá o schema "tpch sf1" e a partir daí tem-se todas as tabelas que possuem os dados brutos que serão transformados pelo projeto.
-  Para ter certeza, vamos exibir alguns resultados destas tabelas. Crie um "warehouse" de amostra e com a capacidade de tamanho pequena com a seguinte linha de comando:
+Com a conta teste criada no Snowflake é preciso verificar que possuimos todos os dados de que precisamos para transformar e executar o projeto. 
+
+Vá para a guia "Worksheets", clique na opção de "+Worksheets" para adicionar uma nova planilha. Neste momento, clique em "Databases", você verá dois banco de dados e um deles se chama "snowflake sample data". Ao explandi-ló  você verá o schema "tpch sf1" e a partir daí tem-se todas as tabelas que possuem os dados brutos que serão transformados pelo projeto.
+
+Para ter certeza, vamos exibir alguns resultados destas tabelas. Crie um "warehouse" de amostra e com a capacidade de tamanho pequena com a seguinte linha de comando:
   
 ```bash
 create warehouse sample_warehouse with warehouse_size = xsmall
 ```
-  No quadro superior a direita, certifique de indicar a role "ACCOUNTADMIN" e o warehouse "SAMPLE_WAREHOUSE", em seguida, execute o seguinte trecho de comando: 
+
+No quadro superior a direita, certifique de indicar a role "ACCOUNTADMIN" e o warehouse "SAMPLE_WAREHOUSE", em seguida, execute o seguinte trecho de comando: 
   
 ```bash
-	select *
-  from snowflake_sample_data.tpch_sf1.orders
-  limit 100;
+select *
+from snowflake_sample_data.tpch_sf1.orders
+limit 100;
 ```
 
 do VS Code aberta, acesse o terminal pelo atalho *Ctrl + '*. 
