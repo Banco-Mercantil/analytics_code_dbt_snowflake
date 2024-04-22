@@ -17,7 +17,7 @@ Para iniciar um projeto utilizando o DBT CLOUD, usaremos uma conta de teste. A c
  
 Por meio desta conta, será possível construir pipelines de transformação de dados escaláveis usando o DBT e o SNOWFLAKE.
 
-- [Link de criação conta teste Snowflake]: (https://signup.snowflake.com/)
+- [Link de criação conta teste Snowflake](https://signup.snowflake.com/)
 
 ## 🚀 Inicializando o projeto DBT
 Com a conta teste criada no Snowflake é preciso verificar que possuimos todos os dados de que precisamos para transformar e executar o projeto. 
