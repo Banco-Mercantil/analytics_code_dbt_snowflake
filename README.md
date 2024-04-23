@@ -37,6 +37,12 @@ select *
 from snowflake_sample_data.tpch_sf1.orders
 limit 100;
 ```
+Os resultados serão exibidos na sequência.
+
+Com isso, é possível criar uma conta  DBT Labs através da partner connect. Pesquise por DBT em partner connect e selecione o item da pesquisa, no pop-up aberto, na seção "Optional Grant" informe o nome do banco de dados criado "SNOWFLAKE_SAMPLE_DATA". Siga com a conexão e ative-a.
+
+Você será redirecionado para o site do DBT. Crie uma conta neste ambiente, clicando em "Complete Registration". Agora você deve ser redirecionado para sua conta DBT Cloud já com uma conexão com sua conta SNOWFLAKE.
+
 
 
 
