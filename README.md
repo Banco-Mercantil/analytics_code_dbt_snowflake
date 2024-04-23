@@ -44,7 +44,11 @@ Com isso, é possível criar uma conta  DBT Labs através da partner connect. Pe
 
 Você será redirecionado para o site do DBT. Crie uma conta neste ambiente, clicando em "Complete Registration". Agora você deve ser redirecionado para sua conta DBT Cloud já com uma conexão com sua conta SNOWFLAKE.
 
+Nesta etapa, para entrar na área de nuvem DBT, abra a IDE clicando no botão "Develop" no canto superior a esquerda. Quando o IDE terminar de carregar, clique no "Initialize dbt project", botão verde no canto superior esquerdo da tela. O processo de inicialização cria um projeto DBT na árvore de arquivos no lado esquerdo da tela com todos os arquivos e pastas principais do DBT necessários. 
 
+Após o projeto criado, clique "Commit and sync", no canto superior esquerdo, para enviar/submeter os novos arquivos e pastas da etapa de inicialização. Um pop-up será aberto, informe uma mensagem de commit relevante para o trabalho: "initialize project". Na sequencia, clique em "Commit Changes" na janela pop-up.
+
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)
 
 
 
