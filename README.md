@@ -48,11 +48,12 @@ Nesta etapa, para entrar na área de nuvem DBT, abra a IDE clicando no botão "D
 
 Após o projeto criado, clique "Commit and sync", no canto superior esquerdo, para enviar/submeter os novos arquivos e pastas da etapa de inicialização. Um pop-up será aberto, informe uma mensagem de commit relevante para o trabalho: "initialize project". Na sequencia, clique em "Commit Changes" na janela pop-up.
 
-<sub>
-Commit criará uma nova versão com as edições acrescentadas ao projeto, gerando uma subversão do projeto. Push irá direcionar essa alteração da branch master para origin, ou seja, retirar do repositório local (Git) para o repositório remoto (GitHub). 
-		
-Cada Commit dado, será criada uma nova versão, ao final do dia, dá-se o push para gerar uma cópia do projeto no GitHub (Origin).
-</sub>
+<sup>
+
+	Commit criará uma nova versão com as edições acrescentadas ao projeto, gerando uma subversão do projeto. Push irá direcionar essa alteração da branch master para origin, ou seja, retirar do repositório local (Git) para o repositório remoto (GitHub). 
+	Cada Commit dado, será criada uma nova versão, ao final do dia, dá-se o push para gerar uma cópia do projeto no GitHub (Origin).
+
+</sup>
 
 
 
