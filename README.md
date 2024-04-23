@@ -59,7 +59,7 @@ A IDE possui alguns recursos chaves, ela é um editor de texto, um executor SQL 
 Clique em **+Create new file** para abrir o notebook da IDE. Nesta fase, um SQL Runner é aberto, uma linha de comando inferior na tela para executar comandos do DBT como ```dbt run``` e uma árvore de arquivos e controles git no canto superior a esquerda da tela.
 
 
-
+![Imagem](https://quickstarts.snowflake.com/guide/accelerating_data_teams_with_snowflake_and_dbt_cloud_hands_on_lab/img/516d62e53cdc1ba1.png)
 
 
 
