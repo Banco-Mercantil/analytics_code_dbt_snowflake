@@ -48,12 +48,15 @@ Nesta etapa, para entrar na área de nuvem DBT, abra a IDE clicando no botão "D
 
 Após o projeto criado, clique "Commit and sync", no canto superior esquerdo, para enviar/submeter os novos arquivos e pastas da etapa de inicialização. Um pop-up será aberto, informe uma mensagem de commit relevante para o trabalho: "initialize project". Na sequencia, clique em "Commit Changes" na janela pop-up.
 
-**
-Commit criará uma nova versão com as edições acrescentadas ao projeto, gerando uma subversão do projeto. Push irá direcionar essa alteração da branch master para origin, ou seja, retirar do repositório local (Git) para o repositório remoto (GitHub). 
+_Commit criará uma nova versão com as edições acrescentadas ao projeto, gerando uma subversão do projeto. Push irá direcionar essa alteração da branch master para origin, ou seja, retirar do repositório local (Git) para o repositório remoto (GitHub). _
  
-Cada Commit dado, será criada uma nova versão, ao final do dia, dá-se o push para gerar uma cópia do projeto no GitHub (Origin).
+_Cada Commit dado, será criada uma nova versão, ao final do dia, dá-se o push para gerar uma cópia do projeto no GitHub (Origin)._
 
-**
+Ao confirmar, ele será salvo no repositório git gerenciado que foi criado durante a inscrição no Partner Connect. Este commit inicial é o único commit que será feito diretamente em nosso main branch (branch master/ramificação principal) e daqui em diante estaremos fazendo todo o nosso trabalho em um branch de desenvolvimento (merge no master). Isso nos permite manter nosso trabalho de desenvolvimento separado do código de produção.
+
+A IDE possui alguns recursos chaves, ela é um editor de texto, um executor SQL e uma CLI com controle de versão git, tudo integrado em um único pacote. O fluxo de trabalho git no DBT Cloud permite controlar facilmente a versão de todo o seu trabalho com apenas alguns cliques. 
+
+Clique em **+Create new file** para abrir o notebook da IDE. Nesta fase, um SQL Runner é aberto, uma linha de comando inferior na tela para executar comandos do DBT como ```dbt run``` e uma árvore de arquivos e controles git no canto superior a esquerda da tela.
 
 
 
