@@ -76,9 +76,9 @@ Agora vamos passar para o Snowflake para confirmar se os objetos foram realmente
 Agora, no worksheet do Snowflake, crie um novo **warehouse** que usaremos no projeto dbt. Copie e cole a seguinte série de comandos e execute-os em ordem no worksheet do Snowflake.
 
 ```
-	use role accountadmin;
-	create warehouse pc_dbt_wh_large with warehouse_size = large;
-	grant all on warehouse pc_dbt_wh_large to role pc_dbt_role;
+use role accountadmin;
+create warehouse pc_dbt_wh_large with warehouse_size = large;
+grant all on warehouse pc_dbt_wh_large to role pc_dbt_role;
 ```
 
 Aqui estamos usando a função de administrador de conta para criar um tamanho de **warehouse** maior e concedendo todas as habilidades para ler, escrever e todas as demais atribuições.
