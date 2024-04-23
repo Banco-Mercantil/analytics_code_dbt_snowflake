@@ -51,6 +51,7 @@ Após o projeto criado, clique "Commit and sync", no canto superior esquerdo, pa
 <sup>
 
 	Commit criará uma nova versão com as edições acrescentadas ao projeto, gerando uma subversão do projeto. Push irá direcionar essa alteração da branch master para origin, ou seja, retirar do repositório local (Git) para o repositório remoto (GitHub). 
+ 
 	Cada Commit dado, será criada uma nova versão, ao final do dia, dá-se o push para gerar uma cópia do projeto no GitHub (Origin).
 
 </sup>
