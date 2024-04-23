@@ -7,10 +7,11 @@ DBT é um fluxo de trabalho de transformação de dados seguindo as melhores pr�
 
 
 ## 🧪 Manual de Apoio
-O projeto foi desenvolvido com base nas instruções do seguinte documento:
+O projeto foi desenvolvido com base nas instruções dos seguintes materiais:
 
 - [Manual Base](https://quickstarts.snowflake.com/guide/accelerating_data_teams_with_snowflake_and_dbt_cloud_hands_on_lab/index.html?index=..%2F..index#0)
 
+- [Vídeo de apoio](https://www.youtube.com/watch?v=84RA7TuhCpg)
 
 ## 🔨 Ferramentas Necessárias
 Para iniciar um projeto utilizando o DBT CLOUD, usaremos uma conta de teste. A criação da conta DBT CLOUD será feita por meio do SNOWFLAKE através de uma conexão nativa (parceira). 
