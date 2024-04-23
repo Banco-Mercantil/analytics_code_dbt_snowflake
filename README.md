@@ -58,160 +58,86 @@ A IDE possui alguns recursos chaves, ela é um editor de texto, um executor SQL 
 
 Clique em **+Create new file** para abrir o notebook da IDE. Nesta fase, um SQL Runner é aberto, uma linha de comando inferior na tela para executar comandos do DBT como ```dbt run``` e uma árvore de arquivos e controles git no canto superior a esquerda da tela.
 
-
 ![Imagem](https://quickstarts.snowflake.com/guide/accelerating_data_teams_with_snowflake_and_dbt_cloud_hands_on_lab/img/516d62e53cdc1ba1.png)
 
+Agora é possível executar os primeiros modelos DBTs, os quais vem por padrão na pasta "models\example", para ilustrar como executar o dbt na linha de comando. Digite "dbt run" na linha de comando na parte inferior da tela e pressione "Enter" no teclado. Quando a barra de execução se expandir, você poderá ver os resultados da execução concluidos com sucesso.
 
+![Imagem](https://quickstarts.snowflake.com/guide/accelerating_data_teams_with_snowflake_and_dbt_cloud_hands_on_lab/img/7c1cb782586306f4.png)
 
-
-
-
-
-
-
-![imagem](https://myoctocat.com/assets/images/base-octocat.svg)
-
-
-
-
-
-do VS Code aberta, acesse o terminal pelo atalho *Ctrl + '*. 
-Acesse o caminho no qual deseja configurar seu primeiro projeto:
-```bash
-PS: ...> cd K:\
-  PS: K:\>
-PS: K:\> cd GEC\2024\'04. Dados'\'0_Snowflake' 
-  PS K:\GEC\2024\04. Dados\0_Snowflake>
+Os resultados da execução permitem que você veja o código que o DBT compila e envia ao SNOWFLAKE para execução. Para visualizar os logs, clique em uma das guias do modelo e, em seguida, clique em **details**. Se você rolar um pouco para baixo, poderá ver o código compilado e como o DBT interage com o SNOWFLAKE. Dado que esta execução ocorreu em nosso ambiente de desenvolvimento, os modelos foram criados em seu esquema de desenvolvimento, estruturado como sua inicial e sobrenome:
+```
+PC_DBT_DB.dbt_PFernandes.my_first_dbt_model
+PC_DBT_DB.dbt_PFernandes.my_second_dbt_model
 ```
 
-Dentro da pasta na qual o projeto irá ser salvo, executar o comando:	
-```bash
-PS K:\GEC\2024\04. Dados\0_Snowflake> dbt init
-  Running with dbt=1.5.0
-  Enter a name for yout project (letters, dgits, underscore): NOME_DO_NOVO_PROJETO
-    Precione "Enter"
+Agora vamos passar para o Snowflake para confirmar se os objetos foram realmente criados. Retorne ao SNOWFLAKE, em Data -> Databases, clique em **refresh** e desça a árvore do bando de dados **PC_DBT_DB**. Neste, deverá haver o schema **dbt_PFernandes** que, por sua vez, deverá conter as duas tabelas criadas: **my_first_dbt_model** e **my_second_dbt_model**.
+
+Agora, no worksheet do Snowflake, crie um novo **warehouse** que usaremos no projeto dbt. Copie e cole a seguinte série de comandos e execute-os em ordem no worksheet do Snowflake.
+
+```
+	use role accountadmin;
+	create warehouse pc_dbt_wh_large with warehouse_size = large;
+	grant all on warehouse pc_dbt_wh_large to role pc_dbt_role;
 ```
 
-Informe os parâmetros da conexão com o banco de dados seguindo as instruções exibidas no terminal:
-```bash
-Which database would you like to use?
-[1]snowflake
-Enter a number: 1
-account (https://<this_value>.snowflakecomputing.com): ffa72186.us-east-1		
-user (dev username): xxxxxxx@MERCANTIL.COM.BR
-[1] password	
-[2] keypair
-[3] sso
-Desired authentication type option (enter a number): 3
-authenticator ('externalbrowser' or a valid Okta URL) [externalbrowser]: externalbrowser
-role (dev role): SNFLK_AD_GERENCIA_EXCELENCIA_COMERCIAL
-warehouse (warehouse name): WH_DEV
-database (default database that dbt will build objects in): SDX_EXCELENCIA_COMERCIAL
-schema (default schema that dbt will build objects in):  EFET_CAMPANHAS__INCENVITO_REDE
-threads (1 or more) [1]: 16
-  PS K:\GEC\2024\04. Dados\0_Snowflake\NOME_DO_NOVO_PROJETO>
+Aqui estamos usando a função de administrador de conta para criar um tamanho de **warehouse** maior e concedendo todas as habilidades para ler, escrever e todas as demais atribuições.
+
+Após executar, no quadro superior a direita, certifique de indicar a role **ACCOUNTADMIN** e o warehouse **PC_DBT_WH_LARGE**.
+
+Podemos, então, seguir para a próxima etapa de definir a estrutura fundamental do projeto. 
+
+Para definir a base para este projeto vamos retornar ao **DBT Cloud** e criar um novo **branch** (ramificação). Clique no **create branch**, um botão verde no canto superior esquerdo da tela para abrir uma janela e nomear sua filial (snowflake_workshop). Nesta fase, estaremos trabalhando no **branch** de desenvolvimento. 
+
+O próximo passo é abrir o arquivo **dbt_project.yml** do projeto. Este é o arquivo que o dbt procura para reconhecer que o diretório de arquivos em que estamos trabalhando é um projeto DBT. Nele, vamos atualizar seus parâmetros substituindo quase todo o conteúdo existente, deixando apenas o trecho: 
+
+```
+# In dbt, the default materialization for a model is a view. This means, when you run 
+# dbt run or dbt build, all of your models will be built as a view in your data platform. 
+# The configuration below will override this setting for models in the example folder to 
+# instead be materialized as tables. Any models you add to the root of the models folder will 
+# continue to be built as views. These settings can be overridden in the individual model files
+# using the `{{ config(...) }}` macro.
+
+models:
+  my_new_project:
+    # Applies to all files under models/example/
+		example:
+		  materialized: view
 ```
 
-Nesta fase, o projeto foi criado junto com seus respectivos arquivos como: .vscode, analyses, dbt_project.yml. Para abri-ló basta digitar o comando seguinte:
-```bash
-PS K:\GEC\2024\04. Dados\0_Snowflake\NOME_DO_NOVO_PROJETO> code .
+Copie e cole o seguinte código acima do trecho que devemos manter no arquivo:
+
 ```
- 
-Acesse o terminal do novo VS Code aberto através do comando anterior *Ctrl '*:
-```bash
-PS K:\GEC\2024\04. Dados\0_Snowflake\NOME_DO_NOVO_PROJETO>
+name: 'snowflake_workshop'
+version: '1.0.0'
+config-version: 2
+
+profile: 'default'
+
+source-paths: ["models"] # A MINHA VERSÃO EXIGIU ESSA CONFIGURAÇÃO model_paths: ["models"]
+analysis-paths: ["analysis"] # A MINHA VERSÃO EXIGIU ESSA CONFIGURAÇÃO analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"  
+clean-targets:         
+  - "target"
+  - "dbt_modules"
+
+models:
+  snowflake_workshop:
+    staging:
+      materialized: view
+      snowflake_warehouse: pc_dbt_wh
+    marts:
+      materialized: table
+      snowflake_warehouse: pc_dbt_wh_large
 ```
 
-Teste a conexão criada entre o projeto e o banco de dados executando a linha de comando abaixo:
-```bash
-PS K:\GEC\2024\04. Dados\0_Snowflake\NOME_DO_NOVO_PROJETO> dbt debug
-  Registered adapter: snowflake=1.7.3
-  Connection test: [OK connection ok]
-  All checks passed!
-  PS K:\GEC\2024\04. Dados\0_Snowflake\NOME_DO_NOVO_PROJETO>
-```
+As principais configurações no arquivo estão na seção de modelos. Aqui estamos definindo configurações que queremos aplicar a todos os modelos dentro dessa pasta. Especificamente, estamos demonstrando:
 
-## 🚀 Inicializando o projeto DBT em ambiente virtual
-Com a ferramenta do VS Code aberta, acesse o terminal pelo atalho *Ctrl'*. 
-Acesse o caminho no qual deseja configurar seu primeiro projeto:
-```bash
-PS: ...> cd K:\
-  PS: K:\>
-PS: K:\> cd GEC\2024\'04. Dados'\'0_Snowflake' 
-  PS K:\GEC\2024\04. Dados\0_Snowflake>
-```
-
-Crie um ambiente virtual:
-```bash
-PS K:\GEC\2024\04. Dados\0_Snowflake> python -m venv dbt_venv
-```
-
-Ative o ambiente virtual criado:
-*Obs*: Comando para sistema Windows, este muda no sistema Linux.
-```bash
-PS K:\GEC\2024\04. Dados\0_Snowflake> .\dbt_venv\Scripts\Activate.ps1
-  (dbt_venv) PS K:\GEC\2024\04. Dados\0_Snowflake>
-```
-
-Instale o adapter que estiver utilizando:
-```bash
-(dbt_venv) PS K:\GEC\2024\04. Dados\0_Snowflake> pip install dbt_snowflake
-  [notice] To update, run: python.exe -m pip install --upgrade pip
-  (dbt_venv) PS K:\GEC\2024\04. Dados\0_Snowflake>
-```
-
-Antes de iniciar um novo projeto dbt com o ambiente virtual, é necessário criar uma pasta *.dbt* no diretório do seu usuário. Este arquivo manterá o profile.yaml e as credenciais do usuário são armazenadas:
-```bash
-(dbt_venv) PS K:\GEC\2024\04. Dados\0_Snowflake> mkdir $home\.dbt
-```
-
-Para iniciar o novo projeto, execute:	
-```bash
-(dbt_venv) PS K:\GEC\2024\04. Dados\0_Snowflake> dbt init		
-  Running with dbt=1.5.0
-  Enter a name for yout project (letters, dgits, underscore): NOME_DO_NOVO_PROJETO
-    Precione "Enter"
-```
-
-Informe os parâmetros da conexão com o banco de dados seguindo as instruções exibidas no terminal:
-```bash
-Which database would you like to use?
-[1]snowflake
-Enter a number: 1
-account (https://<this_value>.snowflakecomputing.com): ffa72186.us-east-1		
-user (dev username): xxxxxxx@MERCANTIL.COM.BR
-[1] password	
-[2] keypair
-[3] sso
-Desired authentication type option (enter a number): 3
-authenticator ('externalbrowser' or a valid Okta URL) [externalbrowser]: externalbrowser
-role (dev role): SNFLK_AD_GERENCIA_EXCELENCIA_COMERCIAL
-warehouse (warehouse name): WH_DEV
-database (default database that dbt will build objects in): SDX_EXCELENCIA_COMERCIAL
-schema (default schema that dbt will build objects in):  EFET_CAMPANHAS__INCENVITO_REDE
-threads (1 or more) [1]: 16
-  (dbt_venv) PS K:\GEC\2024\04. Dados\0_Snowflake\NOME_DO_NOVO_PROJETO>
-```
-
-Nesta fase, o projeto foi criado junto com seus respectivos arquivos como: .vscode, analyses, dbt_project.yml. Para abri-ló basta digitar o comando seguinte:
-```bash
-(dbt_venv) PS K:\GEC\2024\04. Dados\0_Snowflake\NOME_DO_NOVO_PROJETO> code .
-```
-
-Acesse o terminal do novo VS Code aberto através do comando anterior *Ctrl '* e ative o ambiente virtual:
-```bash
-PS K:\GEC\2024\04. Dados\0_Snowflake\NOME_DO_NOVO_PROJETO> K:\GEC\2024\04. Dados\0_Snowflake\dbt_venv\Scripts\Activate.ps1
-  (dbt_venv) PS K:\GEC\2024\04. Dados\0_Snowflake\NOME_DO_NOVO_PROJETO> 
-```
-
-Teste a conexão criada entre o projeto e o banco de dados executando a linha de comando abaixo:
-```bash
-(dbt_venv) PS K:\GEC\2024\04. Dados\0_Snowflake\NOME_DO_NOVO_PROJETO> dbt debug
-  Registered adapter: snowflake=1.7.3
-  Connection test: [OK connection ok]
-  All checks passed!
-  (dbt_venv) PS K:\GEC\2024\04. Dados\0_Snowflake\NOME_DO_NOVO_PROJETO>
-```
-
-Note que na pasta *.dbt*, criada no diretório do usuário, agora possui um arquivo profiles.yaml. Este arquivo armazena os detalhes da conexão informada anteriormente na inicialização do dbt.
+_a configuração de **materialized**, que informa ao dbt como materializar modelos ao compilar o código antes de enviá-lo para o Snowflake, e
+a configuração do **snowflake_warehouse**, que especifica qual warehouse do Snowflake deve ser usado ao construir modelos no Snowflake._
 
